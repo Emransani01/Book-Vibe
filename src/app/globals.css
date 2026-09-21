@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
+@plugin "daisyui";
+
+/* =========================================
+   BOOK VIBE - GLOBAL DESIGN SYSTEM
+========================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bv-bg: #fffaf3;
+  --bv-surface: #ffffff;
+  --bv-surface-warm: #f8efe3;
+
+  --bv-primary: #8b5e3c;
+  --bv-primary-dark: #6f472d;
+  --bv-primary-soft: #f1dfca;
+
+  --bv-accent: #d99a5b;
+  --bv-accent-soft: #f8e7d2;
+
+  --bv-text: #29231e;
+  --bv-muted: #756b63;
+
+  --bv-border: #eadfd2;
+
+  --bv-shadow: 0 12px 35px rgba(91, 62, 40, 0.09);
+  --bv-shadow-hover: 0 20px 45px rgba(91, 62, 40, 0.16);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* =========================================
+   BASE
+========================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: var(--bv-bg);
+  color: var(--bv-text);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================
+   SELECTION
+========================================= */
+
+::selection {
+  background: var(--bv-primary);
+  color: white;
+}
+
+/* =========================================
+   BUTTON POLISH
+========================================= */
+
+.btn {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--bv-primary);
+  border-color: var(--bv-primary);
+  color: white;
+  box-shadow: 0 6px 18px rgba(139, 94, 60, 0.18);
+}
+
+.btn-primary:hover {
+  background: var(--bv-primary-dark);
+  border-color: var(--bv-primary-dark);
+  box-shadow: 0 10px 25px rgba(139, 94, 60, 0.28);
+}
+
+.btn-secondary {
+  background: var(--bv-accent);
+  border-color: var(--bv-accent);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #c98546;
+  border-color: #c98546;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* =========================================
+   INPUT / SELECT
+========================================= */
+
+.select,
+.input,
+.textarea {
+  border-color: var(--bv-border);
+  background: var(--bv-surface);
+}
+
+.select:focus,
+.input:focus,
+.textarea:focus {
+  border-color: var(--bv-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 94, 60, 0.1);
+}
+
+/* =========================================
+   BOOK CARD / SURFACE HOVER
+========================================= */
+
+.book-card-hover {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.book-card-hover:hover {
+  transform: translateY(-7px);
+  background: var(--bv-surface-warm);
+  border-color: var(--bv-primary-soft);
+  box-shadow: var(--bv-shadow-hover);
+}
+
+/* =========================================
+   IMAGE HOVER
+========================================= */
+
+.book-image-hover {
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.book-image-hover:hover {
+  transform: scale(1.05);
+  filter: saturate(1.05);
+}
+
+/* =========================================
+   WARM HOVER
+========================================= */
+
+.warm-hover {
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.warm-hover:hover {
+  background: var(--bv-accent-soft);
+  box-shadow: var(--bv-shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* =========================================
+   BANNER
+========================================= */
+
+.banner-hover {
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease,
+    background-color 0.45s ease;
+}
+
+.banner-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 55px rgba(91, 62, 40, 0.17);
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.nav-link {
+  position: relative;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--bv-primary);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover {
+  color: var(--bv-primary);
+  transform: translateY(-1px);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5ede4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a889;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bv-primary);
+}
+
+/* =========================================
+   SMOOTH GLOBAL TRANSITIONS
+========================================= */
+
+button,
+a,
+select {
+  -webkit-tap-highlight-color: transparent;
 }
