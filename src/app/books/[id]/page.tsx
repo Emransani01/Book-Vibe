@@ -50,7 +50,8 @@ const BookDetailsPage = async ({ params }: BookDetailsPageProps) => {
                 alt={book.bookName}
                 width={400}
                 height={550}
-                className="h-auto max-h-[550px] w-full object-cover"
+                className="h-auto max-h-[550px] w-full object-contain"
+                priority
               />
             </div>
           </div>
