@@ -43,44 +43,39 @@ const BookDetailsPage = async ({ params }: BookDetailsPageProps) => {
       <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-lg">
         <div className="grid gap-8 p-6 md:grid-cols-2 md:p-10">
           {/* Book Image */}
-          <div className="flex justify-center">
-            <div className="overflow-hidden rounded-2xl bg-base-200 shadow-md">
+          <div className="flex items-center justify-center">
+            <div className="w-full max-w-[400px] rounded-2xl bg-base-200 p-4 shadow-md">
               <Image
                 src={book.image}
                 alt={book.bookName}
                 width={400}
                 height={550}
-                className="h-auto max-h-[550px] w-full object-contain"
                 priority
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="h-auto max-h-[550px] w-auto max-w-full rounded-xl object-contain"
               />
             </div>
           </div>
 
           {/* Book Information */}
           <div className="flex flex-col">
-            {/* Category */}
             <span className="w-fit rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
               {book.category}
             </span>
 
-            {/* Book Name */}
             <h1 className="mt-5 text-3xl font-bold md:text-4xl">
               {book.bookName}
             </h1>
 
-            {/* Author */}
             <p className="mt-2 text-lg text-base-content/60">
               by {book.author}
             </p>
 
-            {/* Rating */}
             <div className="mt-5 flex items-center gap-2">
               <span className="text-lg font-semibold">Rating:</span>
-
               <span className="text-lg">⭐ {book.rating}</span>
             </div>
 
-            {/* Book Information */}
             <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl bg-base-200 p-5">
               <div>
                 <p className="text-sm text-base-content/50">Pages</p>
@@ -103,7 +98,6 @@ const BookDetailsPage = async ({ params }: BookDetailsPageProps) => {
               </div>
             </div>
 
-            {/* Buttons */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <ReadButton book={book} />
               <WishlistButton book={book} />
