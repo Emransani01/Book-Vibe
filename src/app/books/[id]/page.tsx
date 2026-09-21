@@ -1,4 +1,6 @@
 import React from "react";
+import fs from "fs/promises";
+import path from "path";
 import { IBook } from "@/types/books.tpe";
 import Image from "next/image";
 import WishlistButton from "@/components/shared/WishlistButton";
@@ -11,15 +13,10 @@ interface BookDetailsPageProps {
 }
 
 const getBook = async (id: string): Promise<IBook | undefined> => {
-  const response = await fetch("http://localhost:3000/booksData.json", {
-    cache: "no-store",
-  });
+  const filePath = path.join(process.cwd(), "public", "booksData.json");
+  const file = await fs.readFile(filePath, "utf-8");
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch books data");
-  }
-
-  const books: IBook[] = await response.json();
+  const books: IBook[] = JSON.parse(file);
 
   return books.find((book) => book.bookId === Number(id));
 };
@@ -86,35 +83,28 @@ const BookDetailsPage = async ({ params }: BookDetailsPageProps) => {
             <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl bg-base-200 p-5">
               <div>
                 <p className="text-sm text-base-content/50">Pages</p>
-
                 <p className="mt-1 font-semibold">{book.totalPages}</p>
               </div>
 
               <div>
                 <p className="text-sm text-base-content/50">Publisher</p>
-
                 <p className="mt-1 font-semibold">{book.publisher}</p>
               </div>
 
               <div>
                 <p className="text-sm text-base-content/50">Published Year</p>
-
                 <p className="mt-1 font-semibold">{book.yearOfPublishing}</p>
               </div>
 
               <div>
                 <p className="text-sm text-base-content/50">Category</p>
-
                 <p className="mt-1 font-semibold">{book.category}</p>
               </div>
             </div>
 
             {/* Buttons */}
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              {/* Read Button */}
               <ReadButton book={book} />
-
-              {/* Wishlist Button */}
               <WishlistButton book={book} />
             </div>
           </div>
